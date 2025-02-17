@@ -20,6 +20,7 @@ class WeatherApp:
     
     
 def main():
-    pass
+    initialize_class = WeatherApp()
+    
 if __name__=='__main__':
     main()
