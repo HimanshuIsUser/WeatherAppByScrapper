@@ -1,5 +1,5 @@
 import requests
-
+import pdb
 class WeatherApp:
     def __init__(self):
         self.cities = [
@@ -16,11 +16,14 @@ class WeatherApp:
 
     def _request_for_cities_details_(self,city_name):
         request = requests.get(f'{self.api}find?d={city_name}&{self.api_token}')
+        pdb.set_trace()
         return request
     
     
 def main():
     initialize_class = WeatherApp()
-    
+    for i in initialize_class.cities:
+        initialize_class._request_for_cities_details_(i)
+
 if __name__=='__main__':
     main()
