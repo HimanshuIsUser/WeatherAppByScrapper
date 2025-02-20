@@ -1,5 +1,8 @@
 import requests
 import pdb
+import json
+import os
+import datetime
 class WeatherApp:
     def __init__(self):
         self.cities = [
@@ -19,6 +22,10 @@ def main():
     initialize_class = WeatherApp()
     for i in initialize_class.cities:
         result = initialize_class._request_for_cities_details_(i)
-        print(result)
+        file_name = f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.json'
+        dump = json.dumps(result.json(), indent=4)
+        with open(file_name,'a') as file:
+            file.write(dump)
+            file.close()
 if __name__=='__main__':
     main()
