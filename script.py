@@ -30,16 +30,24 @@ class WeatherApp:
     def _store_in_csv_file(self,data):
         file_name = f'{self.file_name}.csv'
         with open(file_name,'a') as file:
-            csv_data = csv.DictWriter(file,fieldnames=['date','city','latitude','longitude','temprature'])
+            csv_data = csv.DictWriter(file,fieldnames=['lat','lon', 'name', 'temp', 'feels_like', 'temp_min', 'temp_max', 'pressure', 'humidity', 'sea_level', 'grnd_level'])
             csv_data.writeheader()
-            csv_data.writerows({})
+            csv_data.writerows([data])
+
+    def extract_valid_data(self,data):
+        content = data.json()
+        formated_data = content['list'][0]['coord']
+        formated_data = formated_data | {'name':content['list'][0]['name']}
+        formated_data = formated_data | content['list'][0]['main']
+        return formated_data
             
     
 def main():
     initialize_class = WeatherApp()
     for i in initialize_class.cities:
         result = initialize_class._request_for_cities_details_(i)
-        data_in_json = initialize_class._store_in_csv_file(result)
+        clean_data = initialize_class.extract_valid_data(result)
+        initialize_class._store_in_csv_file(clean_data)
         
 if __name__=='__main__':
     main()
