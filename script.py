@@ -4,6 +4,9 @@ import json
 import os
 import datetime
 import csv
+import mysql.connector
+
+mydb = mysql.connector.connect(host="localhost",user="root",password="")
 
 class WeatherApp:
     def __init__(self):
@@ -14,7 +17,6 @@ class WeatherApp:
         self.api_token = "appid=5796abbde9106b7da4febfae8c44c232"
         self.file_name = f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}'
     
-
     def _request_for_cities_details_(self,city_name):
         request = requests.get(f'{self.api}find?q={city_name}&{self.api_token}')
         print(request.url)
@@ -40,14 +42,22 @@ class WeatherApp:
         formated_data = formated_data | {'name':content['list'][0]['name']}
         formated_data = formated_data | content['list'][0]['main']
         return formated_data
-            
-    
+
+    def _store_data_in_db(self,data):
+        cursorObject = mydb.cursor()
+        query = "INSERT INTO STUDENT (NAME, BRANCH, ROLL, SECTION, AGE)\
+VALUES (%s, %s, %s, %s, %s)"
+
+        cursorObject.execute(query, data)
+        mydb.commit()
+        return 'Done'
+
 def main():
     initialize_class = WeatherApp()
     for i in initialize_class.cities:
         result = initialize_class._request_for_cities_details_(i)
         clean_data = initialize_class.extract_valid_data(result)
-        initialize_class._store_in_csv_file(clean_data)
+        initialize_class._store_data_in_db(clean_data)
         
 if __name__=='__main__':
     main()
