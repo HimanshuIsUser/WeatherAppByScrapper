@@ -57,7 +57,7 @@ def main():
     for i in initialize_class.cities:
         result = initialize_class._request_for_cities_details_(i)
         clean_data = initialize_class.extract_valid_data(result)
-        # initialize_class._store_data_in_db(clean_data)
+        initialize_class._store_data_in_db(clean_data)
         
 if __name__=='__main__':
     main()
