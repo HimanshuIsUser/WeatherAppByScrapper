@@ -6,7 +6,7 @@ import datetime
 import csv
 import mysql.connector
 
-mydb = mysql.connector.connect(host="localhost",user="root",password="")
+mydb = mysql.connector.connect(host="localhost",user="root",password="",database='WeatherApp')
 
 class WeatherApp:
     def __init__(self):
@@ -45,10 +45,11 @@ class WeatherApp:
 
     def _store_data_in_db(self,data):
         cursorObject = mydb.cursor()
-        query = "INSERT INTO STUDENT (NAME, BRANCH, ROLL, SECTION, AGE)\
-VALUES (%s, %s, %s, %s, %s)"
+        value_list = [j for k, j in data.items()]
+        query = "INSERT INTO weatherData (lat,lon, city_name, temp, feels_like, temp_min, temp_max, pressure, humidity, sea_level, grnd_level)\
+VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s)"
 
-        cursorObject.execute(query, data)
+        cursorObject.execute(query, value_list)
         mydb.commit()
         return 'Done'
 
@@ -57,6 +58,7 @@ def main():
     for i in initialize_class.cities:
         result = initialize_class._request_for_cities_details_(i)
         clean_data = initialize_class.extract_valid_data(result)
+        initialize_class._store_data_in_db(clean_data)
         initialize_class._store_data_in_db(clean_data)
         
 if __name__=='__main__':
