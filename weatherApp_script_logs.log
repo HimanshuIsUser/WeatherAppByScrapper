@@ -1,0 +1,12 @@
+2025-03-05 16:33:44,979 Weather class initialize successfully
+2025-03-05 16:33:44,992 Starting new HTTPS connection (1): api.openweathermap.org:443
+2025-03-05 16:33:45,118 https://api.openweathermap.org:443 "GET /data/2.5/find?q=Delhi&appid=5796abbde9106b7da4febfae8c44c232 HTTP/1.1" 200 2105
+2025-03-05 16:34:10,696 Weather class initialize successfully
+2025-03-05 16:34:10,708 Starting new HTTPS connection (1): api.openweathermap.org:443
+2025-03-05 16:34:10,835 https://api.openweathermap.org:443 "GET /data/2.5/find?q=Delhi&appid=5796abbde9106b7da4febfae8c44c232 HTTP/1.1" 200 2105
+2025-03-05 16:35:22,164 Starting new HTTPS connection (1): api.openweathermap.org:443
+2025-03-05 16:35:22,321 https://api.openweathermap.org:443 "GET /data/2.5/find?q=Delhi&appid=5796abbde9106b7da4febfae8c44c232 HTTP/1.1" 200 2105
+2025-03-05 16:35:52,777 Starting new HTTPS connection (1): api.openweathermap.org:443
+2025-03-05 16:35:52,910 https://api.openweathermap.org:443 "GET /data/2.5/find?q=Delhi&appid=5796abbde9106b7da4febfae8c44c232 HTTP/1.1" 200 2105
+2025-03-05 16:36:01,379 Starting new HTTPS connection (1): api.openweathermap.org:443
+2025-03-05 16:36:01,548 https://api.openweathermap.org:443 "GET /data/2.5/find?q=Delhi&appid=5796abbde9106b7da4febfae8c44c232 HTTP/1.1" 200 2105

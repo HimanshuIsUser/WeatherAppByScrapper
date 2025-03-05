@@ -5,17 +5,31 @@ import os
 import datetime
 import csv
 import mysql.connector
+import logging
+
+logging.basicConfig(filename="weatherApp_script_logs.log",
+                    format='%(asctime)s %(message)s',
+                    filemode='a')
+
+logger = logging.getLogger()
+
+logger.setLevel(logging.DEBUG)
 
 mydb = mysql.connector.connect(host="localhost",user="root",password="",database='WeatherApp')
 
 class WeatherApp:
     def __init__(self):
-        self.cities = [
-            "Delhi"
-        ]
-        self.api = "https://api.openweathermap.org/data/2.5/"
-        self.api_token = "appid=5796abbde9106b7da4febfae8c44c232"
-        self.file_name = f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}'
+        try: 
+            self.cities = [
+                "Delhi"
+            ]
+            self.api = "https://api.openweathermap.org/data/2.5/"
+            self.api_token = "appid=5796abbde9106b7da4febfae8c44c232"
+            self.file_name = f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}'
+            logger.info('Weather class initialize successfully')
+        except Exception as e:
+            logger.error('Having unexcepted error',str(e))
+
     
     def _request_for_cities_details_(self,city_name):
         request = requests.get(f'{self.api}find?q={city_name}&{self.api_token}')
